@@ -1,9 +1,5 @@
-board = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
+# no mete bien las tuplas que son, el problema esta en el or 'X'
+board = [['1', '2', '3'], ['4', 'X', '6'], ['7', '8', '9']]
+board2 = [['O', '2', '3'], ['4', 'X', 'X'], ['7', 'O', '9']]
 
-x = input('numero: ')
-
-for i in range(3):
-    for j in range(3):
-        if x == board[i][j]:
-            board[i][j] = 'X'
-print(board)
+prueba = [(0, 1), (0, 2), (1, 0), (2, 0), (2, 2)]

@@ -1,4 +1,6 @@
-board = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
+from random import randrange
+import textos
+board = [['1', '2', '3'], ['4', 'X', '6'], ['7', '8', '9']]
 
 
 def display_board(x):
@@ -38,6 +40,84 @@ def enter_move(x):
                     for j in range(3):
                         if move == x[i][j]:
                             x[i][j] = 'O'
-            return display_board(x)
+            return x
         except ValueError:
             print('No ingresaste un numero')
+
+
+# implementar list_fields
+
+
+def list_fields(x):
+    vacios = []
+    for i in range(3):
+        for j in range(3):
+            if x[i][j] == 'O' or x[i][j] == 'X':
+                continue
+            else:
+                aux = [i, j]
+                vacios.append(tuple(aux))
+
+    return vacios
+
+
+def draw_move(x):
+    while True:
+        rdm = str(randrange(1, 10))
+        for i in range(3):
+            for j in range(3):
+                if rdm == x[i][j]:
+                    x[i][j] = 'X'
+                    return display_board(x)
+                else:
+                    continue
+
+
+def game(x):
+    display_board(x)
+    for f in range(4):
+        enter_move(x)
+        for i in range(3):
+            if x[0][i] == 'O' and x[1][i] == 'O' and x[2][i] == 'O':
+                return textos.ganaste
+
+            elif x[0][i] == 'X' and x[1][i] == 'X' and x[2][i] == 'X':
+                return textos.perdiste
+            else:
+                continue
+
+        for i in range(3):
+            if x[i][0] == 'O' and x[i][1] == 'O' and x[i][2] == 'O':
+                return textos.ganaste
+            elif x[i][0] == 'X' and x[i][1] == 'X' and x[i][2] == 'X':
+                return textos.perdiste
+            elif x[0][0] == 'X' and x[1][1] == 'X' and x[2][2] == 'X':
+                return textos.perdiste
+            elif x[0][2] == 'X' and x[1][1] == 'X' and x[2][0] == 'X':
+                return textos.perdiste
+            else:
+                continue
+        draw_move(x)
+        for i in range(3):
+            if x[0][i] == 'O' and x[1][i] == 'O' and x[2][i] == 'O':
+                return textos.ganaste
+            elif x[0][i] == 'X' and x[1][i] == 'X' and x[2][i] == 'X':
+                return textos.perdiste
+            else:
+                continue
+
+        for i in range(3):
+            if x[i][0] == 'O' and x[i][1] == 'O' and x[i][2] == 'O':
+                return textos.ganaste
+            elif x[i][0] == 'X' and x[i][1] == 'X' and x[i][2] == 'X':
+                return textos.perdiste
+            elif x[0][0] == 'X' and x[1][1] == 'X' and x[2][2] == 'X':
+                return textos.perdiste
+            elif x[0][2] == 'X' and x[1][1] == 'X' and x[2][0] == 'X':
+                return textos.perdiste
+            else:
+                continue
+    return textos.empate
+
+
+print(game(board))
